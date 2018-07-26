@@ -1,5 +1,9 @@
 <template>
-  <div class="page-container"></div>
+  <div class="page-container">
+    <transition name="fade" mode="out-in">
+      <router-view class="view"></router-view>
+    </transition>
+  </div>
 </template>
 
 <script>

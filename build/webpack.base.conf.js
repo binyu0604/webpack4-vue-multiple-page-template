@@ -126,7 +126,7 @@ const rules = [{
   loader: "babel-loader",
   include: [resolve("src"), resolve("node_modules/webpack-dev-server/client")],
   exclude: file => (/node_modules/.test(file) && !/\.vue\.js/.test(file))
-}, prodCss, {
+}, devCss, {
   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
   loader: "url-loader",
   options: {

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <page-header />
-    <page-container />
+    <router-view />
     <!-- <a href="/world">to world</a> -->
     <!-- <img src="~assets/image/logo.png"> -->
   </div>

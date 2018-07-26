@@ -1,9 +1,24 @@
 <template>
   <div class="page-header">
     <div class="header-inner">
-      <a href="/hello">
-        <img class="logo" src="~assets/image/logo.png" alt="logo">
-      </a>
+      <router-link to="/">
+        <img class="logo" src="~assets/image/logo.png" alt="logo" />
+      </router-link>
+      <router-link to="/top">
+        Top
+      </router-link>
+      <router-link to="/new">
+        New
+      </router-link>
+      <router-link to="/show">
+        Show
+      </router-link>
+      <router-link to="/ask">
+        Ask
+      </router-link>
+      <router-link to="/job">
+        Job
+      </router-link>
     </div>
   </div>
 </template>
@@ -41,6 +56,16 @@ export default {
       font-weight: 300;
       letter-spacing: 0.075em;
       margin-right: 1.8em;
+      &:hover {
+        color: #fff;
+      }
+      &.router-link-active {
+        color: #fff;
+        font-weight: 400;
+      }
+      &:nth-child(6) {
+        margin-right: 0;
+      }
       .logo {
         width: 24px;
         margin-right: 10px;

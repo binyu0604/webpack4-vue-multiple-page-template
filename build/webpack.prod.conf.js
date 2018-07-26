@@ -1,6 +1,5 @@
 const merge = require("webpack-merge")
 const webpack = require("webpack")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 
@@ -8,7 +7,7 @@ const utils = require("./utils")
 const config = require("../config")
 const webpackBaseConfig = require('./webpack.base.conf')
 
-module.exports = merge(webpackBaseConfig, {
+const webpackProdConfig = merge(webpackBaseConfig, {
   mode: "production",
   plugins: [
     new MiniCssExtractPlugin({
@@ -20,3 +19,5 @@ module.exports = merge(webpackBaseConfig, {
     new webpack.optimize.ModuleConcatenationPlugin(),
   ]
 })
+
+module.exports = webpackProdConfig

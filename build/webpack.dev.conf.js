@@ -10,6 +10,20 @@ const config = require("../config")
 const webpackBaseConfig = require("./webpack.base.conf")
 const packageConfig = require("../package.json")
 
+const {
+  pages
+} = require("../config/pages")
+
+
+const rewrites = [];
+
+pages.forEach(page => {
+  rewrites.push({
+    from: new RegExp(`\/${page.name}/.*`),
+    to: `/${page.name}/index.html`
+  })
+})
+
 function createNotifierCallback() {
   return (severity, errors) => {
     if (severity !== "error") return
@@ -53,12 +67,9 @@ module.exports = merge(webpackBaseConfig, {
     //     }
     //   }
     // },
-    // historyApiFallback: {
-    //   rewites: [{
-    //     from: /.*/,
-    //     to: path.posix.join(devConfig.assetsPublicPath, "index.html")
-    //   }]
-    // },
+    historyApiFallback: {
+      rewrites
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
