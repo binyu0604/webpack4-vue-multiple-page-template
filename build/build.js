@@ -1,4 +1,40 @@
-// require('./check-versions')()
-process.env.NODE_ENV = 'production'
+// require("./check-versions")()
+process.env.NODE_ENV = "production"
 
-var config = require('../config')
+const ora = require("ora")
+const path = require("path")
+const chalk = require("chalk")
+const webpack = require("webpack")
+const webpackProdConfig = require("./webpack.prod.conf")
+const rm = require("rimraf")
+const config = require("../config")
+
+const loading = ora("正在构建生产环境...")
+loading.start()
+
+rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), (err) => {
+  if (err) throw err
+  webpack(webpackProdConfig, (err, stats) => {
+    loading.stop()
+    if (err) throw err
+    process.stdout.write(stats.toString({
+      colors: true,
+      modules: false,
+      children: false,
+      chunks: false,
+      chunkModules: false
+    }) + "\n\n")
+
+    if (stats.hasErrors()) {
+      console.log(chalk.red('  Build failed with errors.\n'))
+      process.exit(1)
+    }
+
+    console.log(chalk.cyan('  Build complete.\n'))
+    console.log(chalk.yellow(
+      '  Tip: built files are meant to be served over an HTTP server.\n' +
+      '  Opening index.html over file:// won\'t work.\n'
+    ))
+
+  })
+})
