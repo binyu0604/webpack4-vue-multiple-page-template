@@ -14,15 +14,12 @@ const {
   pages
 } = require("../config/pages")
 
-
-const rewrites = [];
-
-pages.forEach(page => {
-  rewrites.push({
+const rewrites = pages.reduce((sum, page) => {
+  return sum.concat({
     from: new RegExp(`\/${page.name}/.*`),
     to: `/${page.name}/index.html`
   })
-})
+}, [])
 
 function createNotifierCallback() {
   return (severity, errors) => {

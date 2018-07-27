@@ -1,11 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-import Top from '../_components/pageHeader'
-import New from '../_components/pageHeader'
-import Show from '../_components/pageHeader'
-import Ask from '../_components/pageHeader'
-import Job from '../_components/pageHeader'
+import home from "../views/home"
 
 Vue.use(Router)
 
@@ -16,24 +11,9 @@ export default new Router({
   }),
   base: '/hello',
   routes: [{
-    path: '/',
-    name: 'top',
-    component: Top
-  }, {
-    path: '/new',
-    name: 'new',
-    component: New
-  }, {
-    path: '/show',
-    name: 'show',
-    component: Show
-  }, {
-    path: '/ask',
-    name: 'ask',
-    component: Ask
-  }, {
-    path: '/job',
-    name: 'job',
-    component: Job
-  }, ]
+    path: '/home/:type?',
+    name: 'home',
+    component: home,
+    children: []
+  }]
 })
