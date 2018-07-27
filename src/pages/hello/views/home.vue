@@ -1,33 +1,44 @@
 <template>
   <div>
-    <div class="page-header">
-      <div class="header-inner">
-        <router-link to="/"> <img class="logo" src="~assets/image/logo.png" alt="logo" /> </router-link>
-        <router-link v-for="item in linkTarget" :key="item" :to="`/home/${item}`">{{item}}</router-link>
-        <a class="github" href="https://github.com/jsjzh" target="_blank">jsjzh's github</a>
-      </div>
-    </div>
-    <div class="page-container">
-      
-      <!-- <transition name="fade" mode="out-in">
-        <router-view class="view" />
-      </transition> -->
-    </div>
+    <page-header/>
+    <page-container>
+      <ul class="list-container">
+        <router-link tag="li" v-for="item in pageData" :key="item.id" :to="`/detail/${item.id}`">
+          <span class="score">{{item.score}}</span>
+          <span class="type">{{item.type}}</span>
+          <span>
+            <a>{{item.title}}</a>
+            <span class="host"> ({{item.host}})</span>
+          </span> <br/>
+          <span class="meta">
+            <span> by
+              <a href="https://github.com/jsjzh" target="_blank">{{item.by}}</a>
+            </span>
+            <span> {{item.time}} </span>
+            <span> |
+              <a href="https://github.com/jsjzh" target="_blank">{{item.comment}} comments</a>
+            </span>
+          </span>
+        </router-link>
+      </ul>
+    </page-container>
   </div>
 </template>
 
 <script>
 import { getListData } from "@/api";
 
+import pageHeader from "../_components/header";
+import pageContainer from "../_components/container";
+
 export default {
   name: "home",
-  components: {},
+  components: { pageHeader, pageContainer },
   data() {
     return {
-      linkTarget: ["top", "new", "show", "ask", "job"],
       queryData: {
         type: "top",
-        count: 10,
+        count: 20,
         page: 1,
         start: 0
       },
@@ -53,7 +64,6 @@ export default {
   methods: {
     async getPageData() {
       this.pageData = await getListData(this.queryData);
-      console.log(this.pageData);
     },
     initQueryData() {
       this.queryData.count = 10;
@@ -66,60 +76,44 @@ export default {
 
 
 <style lang="scss">
-.page-header {
-  background-color: #f60;
-  position: fixed;
-  z-index: 999;
-  height: 55px;
-  top: 0;
-  left: 0;
-  right: 0;
-  .header-inner {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 15px 5px;
-    a {
-      color: hsla(0, 0%, 100%, 0.8);
-      line-height: 24px;
-      transition: color 0.15s ease;
-      display: inline-block;
-      vertical-align: middle;
-      font-weight: 300;
-      letter-spacing: 0.075em;
-      margin-right: 1.8em;
-      &:hover {
-        color: #fff;
-      }
-      &.router-link-active {
-        color: #fff;
-        font-weight: 400;
-      }
-      &:nth-child(6) {
-        margin-right: 0;
-      }
-      .logo {
-        width: 24px;
-        margin-right: 10px;
-        display: inline-block;
-        vertical-align: middle;
-      }
-      &.github {
-        color: #fff;
-        font-size: 0.9em;
-        margin: 0;
-        float: right;
+ul.list-container {
+  li {
+    background-color: #fff;
+    padding: 10px 40px 10px 80px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    line-height: 20px;
+    .score {
+      color: #ff6600;
+      font-size: 1.1em;
+      font-weight: 700;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 80px;
+      text-align: center;
+      margin-top: -10px;
+    }
+    .type {
+      position: absolute;
+      right: 10px;
+      bottom: 5px;
+      color: #f60;
+      font-size: 0.8em;
+    }
+    .meta,
+    .host {
+      font-size: 0.85em;
+      color: #828282;
+      a {
+        color: #828282;
+        text-decoration: underline;
+        &:hover {
+          color: #ff6600;
+        }
       }
     }
   }
-}
-</style>
-
-<style lang="sass">
-.page-container {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  padding-top: 45px;
 }
 </style>
 

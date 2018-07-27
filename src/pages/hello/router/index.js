@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import home from "../views/home"
+import detail from "../views/detail"
+import error from "../views/error"
 
 Vue.use(Router)
 
@@ -13,7 +15,13 @@ export default new Router({
   routes: [{
     path: '/home/:type?',
     name: 'home',
-    component: home,
-    children: []
+    component: home
+  }, {
+    path: '/detail/:id?',
+    name: 'detail',
+    component: detail
+  }, {
+    path: '*',
+    component: error
   }]
 })
