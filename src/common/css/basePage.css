@@ -5,6 +5,7 @@ html {
   text-rendering: optimizeLegibility;
   color: #333;
   background-color: #f4f5f5;
+  line-height: 1.2em;
 }
 
 a {

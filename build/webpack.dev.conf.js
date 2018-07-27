@@ -14,6 +14,9 @@ const {
   pages
 } = require("../config/pages")
 
+const host = utils.getIPAdress();
+const port = 8083;
+
 const rewrites = pages.reduce((sum, page) => {
   return sum.concat({
     from: new RegExp(`\/${page.name}/.*`),
@@ -42,10 +45,10 @@ module.exports = merge(webpackBaseConfig, {
     hot: true,
     compress: true,
     quiet: true,
-    host: "localhost",
-    port: 8080,
+    host,
+    port,
     open: true,
-    openPage: "hello",
+    openPage: "hello/home/top",
     overlay: {
       warnings: false,
       errors: true
@@ -76,7 +79,7 @@ module.exports = merge(webpackBaseConfig, {
     new FriendlyErrorsPlugin({
       clearConsole: true,
       compilationSuccessInfo: {
-        messages: [`开发环境启动成功，项目运行在: http://localhost:8080`]
+        messages: [`开发环境启动成功，项目运行在: http://${host}:${port}`]
       },
       onErrors: createNotifierCallback()
     })
