@@ -3,19 +3,17 @@ import Router from 'vue-router'
 import home from "../views/home"
 import detail from "../views/detail"
 import error from "../views/error"
-
-import config from '../../../../config'
+import fileUtils from "common/js/file-utils"
 Vue.use(Router)
 
-console.log('==========================================================')
-console.log(config.dev)
-console.log('==========================================================')
+Vue.config.productionTip = false
+
 export default new Router({
   mode: "history",
   scrollBehavior: () => ({
     y: 0
   }),
-  base: '/admin',
+  base: fileUtils.getContextPath(),
   routes: [{
       path: '/',
       name: 'home',
