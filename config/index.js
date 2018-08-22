@@ -9,7 +9,7 @@ module.exports = {
     env: require('./dev.env'),
     assetsPublicPath: '/',
     assetsSubDirectory: 'static',
-    // host: "localhost",
+    host: "localhost",
     port: 8080,
     devtool: 'cheap-module-eval-source-map',
     autoOpenBrowser: true,

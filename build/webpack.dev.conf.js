@@ -15,7 +15,7 @@ const {
 } = require("../config/pages")
 
 const host = utils.getIPAdress();
-const port = 8083;
+const port = process.env.PORT || config.dev.port || 8083;
 
 const rewrites = pages.reduce((sum, page) => {
   return sum.concat({
@@ -48,7 +48,7 @@ module.exports = merge(webpackBaseConfig, {
     host,
     port,
     open: true,
-    openPage: "hello/home/top",
+    openPage: pages[0].name,
     overlay: {
       warnings: false,
       errors: true

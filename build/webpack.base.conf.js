@@ -40,7 +40,7 @@ function getCommonJsPath(fileName) {
 }
 
 function getPageHtmlPath(fileName) {
-  return resolve(`src/pages/${fileName}/index.html`);
+  return resolve(`${fileName}/index.html`);
 }
 
 
@@ -71,7 +71,7 @@ pages.forEach(page => {
   plugins.push(new HtmlWebpackPlugin({
     title: page.title,
     filename: `${page.name}/index.html`,
-    template: getPageHtmlPath(page.name),
+    template: getPageHtmlPath(page.path),
     inject: true,
     chunks: [page.name],
   }))

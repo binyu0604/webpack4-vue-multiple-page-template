@@ -1,7 +1,7 @@
 module.exports = {
   pages: [{
     // 不能重复
-    name: "hello",
+    name: "admin",
     path: "src/pages/hello",
     title: "hello title",
     entryJs: "main.js",
